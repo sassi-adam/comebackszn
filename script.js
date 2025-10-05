@@ -1,4 +1,5 @@
-// عناصر DOM
+
+   // DOM عناصر
 const face = document.getElementById("face");
 const message = document.getElementById("message");
 const eyes = document.querySelectorAll(".eye");
@@ -6,9 +7,9 @@ const mouth = document.querySelector(".mouth");
 
 // قائمة الجمل العشوائية بالإنجليزية
 const phrases = [
-    "Hello! I'm Adam, nice to meet you 😊",
+    "Hello! I'm Adam, nice to meet you 💬",
     "You can achieve anything you set your mind to!",
-    "Smile, today is a beautiful day 🌟",
+    "Smile, today is a beautiful day 🟧",
     "Never give up, everything is possible!",
     "Keep learning and growing every day!",
     "Believe in yourself and stay positive!",
@@ -21,11 +22,11 @@ face.addEventListener("click", () => {
     const randomPhrase = phrases[Math.floor(Math.random() * phrases.length)];
     message.textContent = randomPhrase;
 
-    // تحريك العيون عشوائي (يمين/يسار/اعلى/اسفل)
+    // تحريك العيون عشوائي (يمين/يسار/اعلي/اسفل)
     eyes.forEach(eye => {
         const x = Math.random() * 10 - 5; // -5px إلى 5px
-        const y = Math.random() * 6 - 3;  // -3px إلى 3px
-        eye.style.transform = translate(${x}px, ${y}px);
+        const y = Math.random() * 6 - 3; // -3px إلى 3px
+        eye.style.transform = `translate(${x}px, ${y}px)`;
     });
 
     // TTS بالإنجليزية مع تحريك الفم
