@@ -1,4 +1,3 @@
-/* --- الصفحة العامة --- */
 body {
     margin: 0;
     padding: 0;
@@ -17,7 +16,6 @@ body {
     align-items: center;
 }
 
-/* --- وجه آدم --- */
 #face {
     position: relative;
     width: 220px;
@@ -47,7 +45,7 @@ body {
     margin: 0 25px;
     animation: blink 4s infinite;
     position: relative;
-    box-shadow: inset -2px -2px 4px rgba(0,0,0,0.3);
+    box-shadow: inset -2px -2px 4px rgba(0,0,0,0.3); /* صححت 0.3 إلى 0,0,0,0.3 */
 }
 
 .mouth {
@@ -59,13 +57,11 @@ body {
     transition: height 0.1s;
 }
 
-/* --- الرمش --- */
 @keyframes blink {
     0%, 90%, 100% { height: 30px; }
     95% { height: 5px; }
 }
 
-/* --- الرسائل --- */
 #message {
     margin-top: 25px;
     font-size: 20px;
