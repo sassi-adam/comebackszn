@@ -3,42 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EMO Interactive Robot</title>
+    <title>Adamzz - Interactive Robot</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="background"></div>
+    <div class="background-effects"></div>
     
     <div class="container">
-        <div class="robot">
-            <div class="head">
+        <h1 class="title">Adamzz</h1>
+        
+        <!-- الروبوت -->
+        <div class="robot" id="robot">
+            <!-- الرأس -->
+            <div class="head" id="head">
                 <div class="eyes">
                     <div class="eye left"></div>
                     <div class="eye right"></div>
                 </div>
-                <div class="mouth"></div>
+                <div class="mouth" id="mouth"></div>
             </div>
             
+            <!-- الأيدي -->
             <div class="hands">
-                <div class="hand left"></div>
-                <div class="hand right"></div>
+                <div class="hand left" id="leftHand"></div>
+                <div class="hand right" id="rightHand"></div>
             </div>
             
+            <!-- الجسم -->
             <div class="body">
-                <div class="screen">EMO ROBOT</div>
+                <div class="screen" id="screen">ADAMZZ AI</div>
             </div>
             
+            <!-- الأرجل -->
             <div class="legs">
                 <div class="leg left"></div>
                 <div class="leg right"></div>
             </div>
         </div>
         
-        <button class="interact-btn">🎮 Interact with EMO!</button>
+        <!-- زر التفاعل -->
+        <button class="interact-btn" id="interactBtn">🎮 Play with Adamzz!</button>
         
-        <div class="message">
-            Click on EMO's head to start!
-        </div>
+        <!-- الرسالة -->
+        <div class="message" id="message">Click on Adamzz's head to start the fun!</div>
     </div>
 
     <script src="script.js"></script>
