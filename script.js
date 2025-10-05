@@ -1,251 +1,249 @@
 
-   // DOM عناصر
-const face = document.getElementById("face");
-const message = document.getElementById("message");
-const eyes = document.querySelectorAll(".eye");
-const mouth = document.querySelector(".mouth");
-const container = document.getElementById("container");
+   // العناصر الأساسية
+const head = document.querySelector('.head');
+const message = document.querySelector('.message');
+const mouth = document.querySelector('.mouth');
+const leftHand = document.querySelector('.hand.left');
+const rightHand = document.querySelector('.hand.right');
+const robot = document.querySelector('.robot');
+const screen = document.querySelector('.screen');
+const interactBtn = document.querySelector('.interact-btn');
 
-// قائمة الجمل المحسنة
-const phrases = [
-    "🌟 Hello! I'm Emo, your advanced home companion!",
-    "🚀 Welcome to the future of smart living!",
-    "💫 Let's create some magic together!",
-    "🔮 Your wishes are my commands!",
-    "🎯 Efficiency meets elegance in your smart home!",
-    "⚡ Powered by cutting-edge AI technology!",
-    "🎨 Let's paint your day with amazing experiences!",
-    "🚪 Your gateway to the digital world is here!",
-    "🎵 Life is better with music and technology!",
-    "🌈 Transforming your space into a smart paradise!"
+// قائمة التفاعلات
+const interactions = [
+    {
+        name: "wave",
+        message: "👋 Hello! Nice to meet you!",
+        action: () => waveHello()
+    },
+    {
+        name: "dance",
+        message: "💃 Let's dance together!",
+        action: () => startDance()
+    },
+    {
+        name: "jump",
+        message: "🎉 Whee! This is fun!",
+        action: () => makeJump()
+    },
+    {
+        name: "handshake",
+        message: "🤝 Pleasure to meet you, friend!",
+        action: () => handShake()
+    },
+    {
+        name: "talk",
+        message: "🗣️ I love chatting with you!",
+        action: () => startTalking()
+    },
+    {
+        name: "joke",
+        message: "😂 Why don't robots have brothers? Because they have transistors!",
+        action: () => tellJoke()
+    },
+    {
+        name: "sing",
+        message: "🎵 Beep boop bop... I'm singing!",
+        action: () => startSinging()
+    },
+    {
+        name: "sleep",
+        message: "😴 I'm getting sleepy... zzz",
+        action: () => goToSleep()
+    }
 ];
 
-// تأثيرات الصوت
-const sounds = {
-    click: new Audio("data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQ..."),
-    hover: new Audio("data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQ...")
-};
+// الجمل الإضافية
+const extraMessages = [
+    "You're awesome! 🌟",
+    "Let's be friends! 🤖",
+    "Technology is amazing! 🔧",
+    "I'm learning from you! 📚",
+    "You make me happy! 😊",
+    "Let's explore the world! 🌍",
+    "I'm here to help! 💪",
+    "You're doing great! 🎯"
+];
 
-// إنشاء جزيئات متقدمة
-function createAdvancedParticles() {
-    const particlesContainer = document.createElement('div');
-    particlesContainer.className = 'particles';
-    document.body.appendChild(particlesContainer);
+// التفاعل عند الضغط على الرأس
+head.addEventListener('click', () => {
+    const randomInteraction = interactions[Math.floor(Math.random() * interactions.length)];
+    showMessage(randomInteraction.message);
+    randomInteraction.action();
+    createSparkles();
+});
 
-    for (let i = 0; i < 80; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        particle.style.left = Math.random() * 100 + 'vw';
-        particle.style.animationDelay = Math.random() * 8 + 's';
-        particle.style.animationDuration = (4 + Math.random() * 6) + 's';
-        particlesContainer.appendChild(particle);
-    }
-}
-
-// إنشاء شارة إيمو
-function createEmoBadge() {
-    const badge = document.createElement('div');
-    badge.className = 'emo-badge';
-    badge.textContent = '🤖 EMO PRO EDITION';
-    badge.style.position = 'fixed';
-    badge.style.top = '20px';
-    badge.style.right = '20px';
-    document.body.appendChild(badge);
-}
-
-// تأثيرات عند التحميل
-window.addEventListener('load', () => {
-    createAdvancedParticles();
-    createEmoBadge();
-    createLightBeam();
+// زر التفاعل الإضافي
+interactBtn.addEventListener('click', () => {
+    const randomExtra = extraMessages[Math.floor(Math.random() * extraMessages.length)];
+    showMessage(randomExtra);
+    createSparkles();
     
-    // رسالة ترحيب متحركة
+    // تفاعل عشوائي مع الزر
+    const randomAction = Math.random();
+    if (randomAction < 0.3) {
+        waveHello();
+    } else if (randomAction < 0.6) {
+        startDance();
+    } else {
+        makeJump();
+    }
+});
+
+// وظائف التفاعل
+function waveHello() {
+    robot.classList.add('wave');
     setTimeout(() => {
-        message.innerHTML = "✨ <strong>EMO SYSTEM READY</strong> ✨";
-        message.style.animation = 'messageEntrance 1s ease-out';
+        robot.classList.remove('wave');
     }, 1000);
-});
-
-// إنشاء حزمة ضوء
-function createLightBeam() {
-    const beam = document.createElement('div');
-    beam.className = 'light-beam';
-    container.appendChild(beam);
 }
 
-// تأثيرات متقدمة للعيون
-function advancedEyeEffects() {
-    eyes.forEach((eye, index) => {
-        setInterval(() => {
-            const x = Math.random() * 20 - 10;
-            const y = Math.random() * 15 - 7.5;
-            const scale = 0.9 + Math.random() * 0.2;
-            
-            eye.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
-            eye.style.filter = `hue-rotate(${Math.random() * 360}deg)`;
-        }, 2000 + Math.random() * 2000);
-    });
-}
-
-// تأثيرات النص المتقدمة
-function typeWriterEffect(text, element, speed = 50) {
-    element.innerHTML = '';
-    let i = 0;
-    
-    function type() {
-        if (i < text.length) {
-            element.innerHTML += text.charAt(i);
-            i++;
-            setTimeout(type, speed);
-        }
-    }
-    type();
-}
-
-// تأثيرات اللمس المتقدمة
-face.addEventListener("click", (e) => {
-    // تأثير النقر
-    createRippleEffect(e);
-    
-    // اختيار جملة عشوائية
-    const randomPhrase = phrases[Math.floor(Math.random() * phrases.length)];
-    
-    // تأثير الكتابة
-    typeWriterEffect(randomPhrase, message, 30);
-
-    // تأثير اهتزاز متقدم
-    face.style.animation = 'advancedVibrate 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+function startDance() {
+    robot.classList.add('dance');
     setTimeout(() => {
-        face.style.animation = '';
-    }, 400);
-
-    // تحريك العيون المتقدم
-    eyes.forEach(eye => {
-        const x = Math.random() * 25 - 12.5;
-        const y = Math.random() * 20 - 10;
-        const rotate = Math.random() * 10 - 5;
-        
-        eye.style.transform = `translate(${x}px, ${y}px) rotate(${rotate}deg)`;
-    });
-
-    // TTS مع تأثيرات متقدمة
-    if ('speechSynthesis' in window) {
-        const utter = new SpeechSynthesisUtterance(randomPhrase);
-        utter.lang = "en-US";
-        utter.rate = 0.85;
-        utter.pitch = 1.1;
-        utter.volume = 0.8;
-
-        // تأثيرات صوتية متقدمة
-        utter.onstart = () => {
-            let open = true;
-            window.mouthInterval = setInterval(() => {
-                mouth.style.height = open ? "45px" : "30px";
-                mouth.style.background = open ? 
-                    "linear-gradient(90deg, #ff6b6b, #ffa500, #ffff00)" : 
-                    "linear-gradient(90deg, #ffff00, #ffa500, #ff6b6b)";
-                mouth.style.transform = open ? "scaleX(1.1)" : "scaleX(0.9)";
-                open = !open;
-                
-                // تأثير توهج إضافي
-                face.style.boxShadow = open ? 
-                    "0 0 100px rgba(0, 255, 255, 0.8)" : 
-                    "0 0 60px rgba(255, 0, 255, 0.6)";
-            }, 100);
-        };
-
-        utter.onend = () => {
-            clearInterval(window.mouthInterval);
-            mouth.style.height = "30px";
-            mouth.style.background = "linear-gradient(90deg, #ff6b6b, #ffa500, #ff6b6b)";
-            mouth.style.transform = "scaleX(1)";
-            face.style.boxShadow = "0 0 50px rgba(0, 255, 255, 0.6)";
-        };
-
-        window.speechSynthesis.speak(utter);
-    }
-});
-
-// تأثير التموجات
-function createRippleEffect(event) {
-    const ripple = document.createElement('div');
-    const rect = face.getBoundingClientRect();
-    const size = Math.max(rect.width, rect.height);
-    const x = event.clientX - rect.left - size / 2;
-    const y = event.clientY - rect.top - size / 2;
-    
-    ripple.style.cssText = `
-        position: absolute;
-        border-radius: 50%;
-        background: radial-gradient(circle, rgba(0,255,255,0.3) 0%, transparent 70%);
-        width: ${size}px;
-        height: ${size}px;
-        left: ${x}px;
-        top: ${y}px;
-        pointer-events: none;
-        animation: ripple 0.6s ease-out;
-        z-index: 1;
-    `;
-    
-    face.appendChild(ripple);
-    setTimeout(() => ripple.remove(), 600);
+        robot.classList.remove('dance');
+    }, 2000);
 }
 
-// إضافة أنيميشنز CSS ديناميكية
-const advancedStyles = `
-    @keyframes advancedVibrate {
-        0%, 100% { transform: translateX(0) rotate(0deg); }
-        25% { transform: translateX(-8px) rotate(-1deg); }
-        50% { transform: translateX(8px) rotate(1deg); }
-        75% { transform: translateX(-8px) rotate(-1deg); }
-    }
-    
-    @keyframes messageEntrance {
-        0% { 
-            transform: translateY(30px) scale(0.8);
-            opacity: 0;
-        }
-        100% { 
-            transform: translateY(0) scale(1);
-            opacity: 1;
-        }
-    }
-    
-    @keyframes ripple {
-        0% {
-            transform: scale(0.1);
-            opacity: 1;
-        }
-        100% {
-            transform: scale(2);
-            opacity: 0;
-        }
-    }
-    
-    @keyframes particleGlow {
-        0%, 100% { opacity: 0.3; }
-        50% { opacity: 1; }
-    }
-`;
+function makeJump() {
+    robot.classList.add('jump');
+    setTimeout(() => {
+        robot.classList.remove('jump');
+    }, 500);
+}
 
-const styleSheet = document.createElement('style');
-styleSheet.textContent = advancedStyles;
-document.head.appendChild(styleSheet);
+function handShake() {
+    robot.classList.add('handshake');
+    setTimeout(() => {
+        robot.classList.remove('handshake');
+    }, 800);
+}
 
-// تهيئة التأثيرات
-advancedEyeEffects();
+function startTalking() {
+    robot.classList.add('talking');
+    setTimeout(() => {
+        robot.classList.remove('talking');
+    }, 3000);
+}
 
-// تأثيرات التمرير
-face.addEventListener('mouseenter', () => {
-    face.style.transform = 'scale(1.05) rotate(1deg)';
-    eyes.forEach(eye => {
-        eye.style.transform = 'scale(1.1)';
-    });
+function tellJoke() {
+    screen.textContent = "Haha! 😄";
+    setTimeout(() => {
+        screen.textContent = "EMO ROBOT";
+    }, 2000);
+}
+
+function startSinging() {
+    const notes = ["♪", "♫", "♬", "🎵"];
+    let counter = 0;
+    const singInterval = setInterval(() => {
+        screen.textContent = notes[counter % notes.length];
+        counter++;
+    }, 200);
+    
+    setTimeout(() => {
+        clearInterval(singInterval);
+        screen.textContent = "EMO ROBOT";
+    }, 2000);
+}
+
+function goToSleep() {
+    screen.textContent = "Zzz... 😴";
+    mouth.style.height = "5px";
+    setTimeout(() => {
+        screen.textContent = "EMO ROBOT";
+        mouth.style.height = "20px";
+    }, 3000);
+}
+
+// عرض الرسالة
+function showMessage(text) {
+    message.textContent = text;
+    message.style.animation = 'none';
+    setTimeout(() => {
+        message.style.animation = 'messageEntrance 0.5s ease-out';
+    }, 10);
+}
+
+// إنشاء تأثير الشرارات
+function createSparkles() {
+    for (let i = 0; i < 10; i++) {
+        const sparkle = document.createElement('div');
+        sparkle.className = 'sparkle';
+        sparkle.style.left = Math.random() * 200 + 'px';
+        sparkle.style.top = Math.random() * 300 + 'px';
+        sparkle.style.setProperty('--tx', (Math.random() * 100 - 50) + 'px');
+        sparkle.style.setProperty('--ty', (Math.random() * 100 - 50) + 'px');
+        
+        document.querySelector('.robot').appendChild(sparkle);
+        
+        setTimeout(() => {
+            sparkle.remove();
+        }, 1000);
+    }
+}
+
+// فقاعات الدردشة العشوائية
+function randomChatBubble() {
+    const chatTexts = [
+        "Hi there!",
+        "Beep boop!",
+        "I'm EMO!",
+        "Let's play!",
+        "Awesome!",
+        "Wow!",
+        "Cool!",
+        "Fun!",
+        "Yay!",
+        "Hello!"
+    ];
+    
+    const bubble = document.createElement('div');
+    bubble.className = 'chat-bubble';
+    bubble.textContent = chatTexts[Math.floor(Math.random() * chatTexts.length)];
+    
+    bubble.style.left = Math.random() * 100 + 'px';
+    bubble.style.top = Math.random() * 50 + 'px';
+    
+    robot.appendChild(bubble);
+    
+    setTimeout(() => {
+        bubble.classList.add('show');
+    }, 100);
+    
+    setTimeout(() => {
+        bubble.classList.remove('show');
+        setTimeout(() => bubble.remove(), 300);
+    }, 2000);
+}
+
+// فقاعات دورية
+setInterval(() => {
+    if (Math.random() < 0.3) { // 30% chance every 5 seconds
+        randomChatBubble();
+    }
+}, 5000);
+
+// تفاعل عند تحميل الصفحة
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        showMessage("🤖 Welcome! I'm EMO Robot. Click on my head or the button to interact!");
+    }, 1000);
+    
+    // موجة ترحيب أولية
+    setTimeout(() => {
+        waveHello();
+    }, 1500);
 });
 
-face.addEventListener('mouseleave', () => {
-    face.style.transform = 'scale(1) rotate(0deg)';
-    eyes.forEach(eye => {
-        eye.style.transform = 'scale(1)';
-    });
-});
+// تأثيرات إضافية للشاشة
+setInterval(() => {
+    const effects = ["⚡", "🔧", "🌟", "💡", "🔍", "🎮"];
+    if (Math.random() < 0.1) { // 10% chance every second
+        const originalText = screen.textContent;
+        screen.textContent = effects[Math.floor(Math.random() * effects.length)];
+        setTimeout(() => {
+            screen.textContent = originalText;
+        }, 500);
+    }
+}, 1000);
