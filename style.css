@@ -1,1 +1,594 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #2c3e50;
+    overflow: hidden;
+    position: relative;
+}
+
+/* خلفية متحركة */
+.background-effects {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%);
+    animation: backgroundShift 15s ease-in-out infinite;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 35px;
+    border-radius: 25px;
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    border: 3px solid rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(15px);
+    position: relative;
+    overflow: hidden;
+}
+
+.container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea, #764ba2, #667eea);
+    animation: borderGlow 3s ease-in-out infinite;
+}
+
+/* العنوان */
+.title {
+    font-size: 2.5em;
+    font-weight: 800;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.title::after {
+    content: '🤖';
+    position: absolute;
+    right: -45px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.8em;
+    animation: float 3s ease-in-out infinite;
+}
+
+/* الروبوت */
+.robot {
+    position: relative;
+    width: 200px;
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+}
+
+/* الرأس */
+.head {
+    width: 110px;
+    height: 110px;
+    background: linear-gradient(145deg, #f0f0f0, #ffffff);
+    border-radius: 50%;
+    border: 4px solid #667eea;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+    box-shadow: 
+        inset 0 -8px 15px rgba(0,0,0,0.1),
+        0 8px 20px rgba(0,0,0,0.15),
+        0 0 0 3px rgba(255,255,255,0.8);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    overflow: hidden;
+}
+
+.head::before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    border: 2px solid rgba(102, 126, 234, 0.1);
+    border-radius: 50%;
+}
+
+.head:hover {
+    transform: scale(1.08) rotate(2deg);
+    box-shadow: 
+        inset 0 -8px 15px rgba(0,0,0,0.1),
+        0 12px 30px rgba(0,0,0,0.25),
+        0 0 0 3px rgba(255,255,255,0.9);
+}
+
+/* العيون */
+.eyes {
+    display: flex;
+    justify-content: space-between;
+    width: 75px;
+    margin-top: 20px;
+    position: relative;
+}
+
+.eye {
+    width: 20px;
+    height: 28px;
+    background: linear-gradient(145deg, #00a8ff, #0077b6);
+    border-radius: 50%;
+    border: 2px solid #0056b3;
+    position: relative;
+    animation: blink 4s infinite;
+    box-shadow: 
+        inset 0 -3px 6px rgba(0,0,0,0.3),
+        0 2px 8px rgba(0, 168, 255, 0.4);
+    overflow: hidden;
+}
+
+.eye::before {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #000;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 8px rgba(0, 168, 255, 0.6);
+}
+
+.eye::after {
+    content: '';
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: #fff;
+    border-radius: 50%;
+    top: 35%;
+    left: 35%;
+    filter: blur(0.5px);
+}
+
+/* الفم */
+.mouth {
+    width: 38px;
+    height: 14px;
+    background: linear-gradient(145deg, #ff6b6b, #ff5252);
+    border-radius: 0 0 18px 18px;
+    margin-top: 15px;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 
+        inset 0 -3px 5px rgba(0,0,0,0.2),
+        0 2px 5px rgba(255, 107, 107, 0.3);
+}
+
+.mouth::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    animation: mouthShine 2s infinite;
+}
+
+/* الجسم */
+.body {
+    width: 130px;
+    height: 90px;
+    background: linear-gradient(145deg, #e8e8e8, #f8f8f8);
+    border-radius: 18px;
+    margin-top: -8px;
+    border: 4px solid #667eea;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    box-shadow: 
+        inset 0 -5px 10px rgba(0,0,0,0.1),
+        0 6px 15px rgba(0,0,0,0.15),
+        0 0 0 3px rgba(255,255,255,0.8);
+}
+
+.body::before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    border: 2px solid rgba(102, 126, 234, 0.1);
+    border-radius: 12px;
+}
+
+.screen {
+    width: 85px;
+    height: 50px;
+    background: linear-gradient(145deg, #1a1a2e, #16213e);
+    border: 3px solid #00ff9d;
+    border-radius: 10px;
+    color: #00ff9d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 11px;
+    font-weight: bold;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    text-shadow: 0 0 8px #00ff9d;
+    box-shadow: 
+        inset 0 0 15px rgba(0, 255, 157, 0.4),
+        0 0 20px rgba(0, 255, 157, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.screen::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(0, 255, 157, 0.1), transparent);
+    animation: screenScan 3s linear infinite;
+}
+
+/* الأيدي */
+.hands {
+    position: absolute;
+    top: 90px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    z-index: 3;
+}
+
+.hand {
+    width: 55px;
+    height: 14px;
+    background: linear-gradient(145deg, #e8e8e8, #f8f8f8);
+    border-radius: 10px;
+    position: relative;
+    transition: all 0.4s ease;
+    border: 3px solid #667eea;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+}
+
+.hand.left {
+    transform-origin: right center;
+    transform: translateX(-60px);
+}
+
+.hand.right {
+    transform-origin: left center;
+    transform: translateX(60px);
+}
+
+.hand::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 24px;
+    background: linear-gradient(145deg, #e8e8e8, #f8f8f8);
+    border-radius: 50%;
+    border: 3px solid #667eea;
+}
+
+.hand.left::after {
+    right: -10px;
+    top: -20px;
+}
+
+.hand.right::after {
+    left: -10px;
+    top: -20px;
+}
+
+/* الأرجل */
+.legs {
+    display: flex;
+    justify-content: space-around;
+    width: 110px;
+    margin-top: -5px;
+}
+
+.leg {
+    width: 18px;
+    height: 45px;
+    background: linear-gradient(145deg, #d8d8d8, #e8e8e8);
+    border-radius: 0 0 10px 10px;
+    border: 3px solid #667eea;
+    box-shadow: inset 0 -4px 6px rgba(0,0,0,0.1);
+}
+
+/* زر التفاعل */
+.interact-btn {
+    padding: 14px 28px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border: none;
+    border-radius: 25px;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 
+        0 6px 20px rgba(102, 126, 234, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.interact-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.interact-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 
+        0 10px 25px rgba(102, 126, 234, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.interact-btn:hover::before {
+    left: 100%;
+}
+
+.interact-btn:active {
+    transform: translateY(-1px);
+}
+
+/* الرسالة */
+.message {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    padding: 18px 28px;
+    border-radius: 20px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+    min-height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 300px;
+    border: 3px solid rgba(102, 126, 234, 0.2);
+    box-shadow: 
+        inset 0 2px 6px rgba(0,0,0,0.05),
+        0 4px 12px rgba(0,0,0,0.1);
+    color: #495057;
+    position: relative;
+    overflow: hidden;
+}
+
+.message::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #667eea, #764ba2, #667eea);
+    animation: borderGlow 3s ease-in-out infinite;
+}
+
+/* الأنيميشنز */
+@keyframes blink {
+    0%, 90%, 100% { 
+        height: 28px;
+        transform: scaleY(1);
+    }
+    95% { 
+        height: 4px;
+        transform: scaleY(0.2);
+    }
+}
+
+@keyframes wave {
+    0%, 100% { 
+        transform: translateX(-60px) rotate(0deg); 
+    }
+    25% { 
+        transform: translateX(-60px) rotate(-50deg); 
+    }
+    50% { 
+        transform: translateX(-60px) rotate(20deg); 
+    }
+    75% { 
+        transform: translateX(-60px) rotate(-30deg); 
+    }
+}
+
+@keyframes handshake {
+    0%, 100% { 
+        transform: translateX(60px) rotate(0deg); 
+    }
+    25% { 
+        transform: translateX(60px) rotate(50deg); 
+    }
+    50% { 
+        transform: translateX(60px) rotate(-20deg); 
+    }
+    75% { 
+        transform: translateX(60px) rotate(30deg); 
+    }
+}
+
+@keyframes dance {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-18px) rotate(-6deg); }
+    50% { transform: translateY(-10px) rotate(6deg); }
+    75% { transform: translateY(-14px) rotate(-3deg); }
+}
+
+@keyframes jump {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-30px); }
+}
+
+@keyframes talk {
+    0%, 100% { 
+        height: 14px;
+        background: linear-gradient(145deg, #ff6b6b, #ff5252);
+    }
+    50% { 
+        height: 20px;
+        background: linear-gradient(145deg, #ff5252, #ff6b6b);
+    }
+}
+
+@keyframes backgroundShift {
+    0%, 100% { 
+        transform: translateX(0) translateY(0);
+        filter: hue-rotate(0deg);
+    }
+    50% { 
+        transform: translateX(-20px) translateY(-20px);
+        filter: hue-rotate(180deg);
+    }
+}
+
+@keyframes borderGlow {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(-50%) translateX(0); }
+    50% { transform: translateY(-50%) translateX(10px); }
+}
+
+@keyframes mouthShine {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+@keyframes screenScan {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+/* كلاسات التفاعل */
+.waving .hand.left {
+    animation: wave 0.8s ease-in-out;
+}
+
+.shaking .hand.right {
+    animation: handshake 0.8s ease-in-out;
+}
+
+.dancing .head {
+    animation: dance 0.7s ease-in-out infinite;
+}
+
+.jumping {
+    animation: jump 0.6s ease-in-out;
+}
+
+.talking .mouth {
+    animation: talk 0.25s ease-in-out infinite;
+}
+
+/* تأثيرات خاصة */
+.sparkle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: radial-gradient(circle, #ffd700, #ff6b00);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: sparkle 1s ease-out forwards;
+    filter: drop-shadow(0 0 8px gold);
+}
+
+@keyframes sparkle {
+    0% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0) rotate(180deg);
+        opacity: 0;
+    }
+}
+
+.message-pop {
+    animation: messagePop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes messagePop {
+    0% {
+        transform: scale(0.8) translateY(20px);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+}
+
+/* شارة Adamzz */
+.adamzz-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    animation: badgePulse 2s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
